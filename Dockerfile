@@ -1,10 +1,17 @@
 FROM ubuntu
 MAINTAINER "Samson"
-RUN apt update
-RUN apt install apache2 -y
-# Installing apache2
-#RUN echo "ServerName 44.223.10.203" >> /etc/apache2/apache2.conf
+
+# Install necessary packages
+RUN apt update && apt install -y apache2 curl
+
+# Copy website files into the container
 COPY ./ /var/www/html/
 
-CMD ["apachectl","-D","FOREGROUND"]
+# Enable necessary Apache modules (you might need proxy and SSL)
+RUN a2enmod proxy proxy_http ssl
+
+# Set up Apache to run in the foreground
+CMD ["apachectl", "-D", "FOREGROUND"]
+
+# Expose port 80 to the Docker container (internal usage)
 EXPOSE 80
