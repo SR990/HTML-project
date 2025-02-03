@@ -1,5 +1,5 @@
 FROM ubuntu
-MAINTAINER "KRISHNA"
+MAINTAINER "Samson"
 RUN apt update
 RUN apt install apache2 -y
 # Installing apache2
