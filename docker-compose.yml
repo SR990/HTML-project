@@ -1,0 +1,17 @@
+version: "3"
+services:
+  html-app:
+    build: .
+    container_name: html-app-container
+    networks:
+      - app-network
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    # No need to expose ports here
+    volumes:
+      - ./html:/var/www/html  # Optional: Sync your local html directory with the container
+
+networks:
+  app-network:
+    driver: bridge
